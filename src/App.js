@@ -1,62 +1,67 @@
 import React, { useState } from 'react';
-
-const InputList = () => {
+import './App.css';
+const CardList = () => {
   const [inputValue, setInputValue] = useState('');
-  const [inputList, setInputList] = useState([]);
+  const [cards, setCards] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(-1);
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleAdd = () => {
+  const handleAddCard = () => {
     if (inputValue.trim() !== '') {
-      const uniqueId = Math.floor(1000 + Math.random() * 9000);
-      const addObj = {
-        id: uniqueId,
-        name: inputValue,
-      };
-      console.log('addObj :>>', addObj);
-      setInputList([...inputList, addObj]);
+      setCards((prevCards) => [...prevCards, inputValue]);
       setInputValue('');
     }
   };
 
-  const handleEdit = (index) => {
-    const editedValue = prompt('Enter the new value:');
-    if (editedValue !== null && editedValue.trim() !== '') {
-      const updatedList = [...inputList];
-      updatedList[index] = editedValue;
-      setInputList(updatedList);
+  const handleEditCard = (index) => {
+    setEditingIndex(index);
+    setInputValue(cards[index]);
+  };
+
+  const handleUpdateCard = () => {
+    if (inputValue.trim() !== '') {
+      setCards((prevCards) => {
+        const updatedCards = [...prevCards];
+        updatedCards[editingIndex] = inputValue;
+        return updatedCards;
+      });
+      setInputValue('');
+      setEditingIndex(-1);
     }
   };
 
-  const handleDelete = (index) => {
-    const updatedList = [...inputList];
-    updatedList.splice(index, 1);
-    setInputList(updatedList);
+  const handleDeleteCard = (index) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards];
+      updatedCards.splice(index, 1);
+      return updatedCards;
+    });
   };
 
   return (
     <div>
-      <input
-        type='text'
-        value={inputValue}
-        onChange={handleChange}
-        placeholder='Enter a value'
-      />
-      <button onClick={handleAdd}>Add</button>
-      <pre>{JSON.stringify(inputList, null, 4)}</pre>
-      {/* <ul>
-        {inputList.map((value, index) => (
-          <li key={index}>
-            {value}
-            <button onClick={() => handleEdit(index)}>Edit</button>
-            <button onClick={() => handleDelete(index)}>Delete</button>
-          </li>
+      <input type='text' value={inputValue} onChange={handleInputChange} />
+      {editingIndex === -1 ? (
+        <button onClick={handleAddCard}>Add</button>
+      ) : (
+        <button onClick={handleUpdateCard}>Update</button>
+      )}
+      <ul>
+        {cards.map((card, index) => (
+          <div className='card_design'>
+            <li key={index}>
+              {card}
+              <button onClick={() => handleEditCard(index)}>Edit</button>
+              <button onClick={() => handleDeleteCard(index)}>Delete</button>
+            </li>
+          </div>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
 
-export default InputList;
+export default CardList;
