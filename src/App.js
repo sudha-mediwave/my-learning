@@ -8,13 +8,6 @@ const CardList = () => {
   const [editingId, setEditingId] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // useEffect(() => {
-  //   const storedCards = localStorage.getItem('cards');
-  //   if (storedCards) {
-  //     setCards(JSON.parse(storedCards));
-  //   }
-  // }, []);
-
   useEffect(() => {
     const storedCards = localStorage.getItem('cards');
     if (storedCards) {
@@ -84,18 +77,22 @@ const CardList = () => {
       if (index !== -1) {
         updatedCards.splice(index, 1);
       }
+
       return updatedCards;
     });
   };
+
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(inputValue);
   };
+
   const filteredCards = searchQuery
     ? cards.filter((card) =>
         card.content.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : cards;
+
   return (
     <div className='main_section'>
       <div className='main_block'>
@@ -133,8 +130,14 @@ const CardList = () => {
       </div>
       {/* <pre>{JSON.stringify(cards, null, 4)}</pre> */}
       <div className='card_main_block'>
-        {filteredCards.map((card) => (
-          <div className='card_design' key={card.id}>
+        {filteredCards.map((card, index) => (
+          <div
+            className='card_design'
+            key={card.id}
+            style={{
+              backgroundColor: index % 2 === 0 ? '#00c9ff' : '#92fe9d',
+            }}
+          >
             {card.content}
             <div className='btn_block'>
               <button onClick={() => handleEditCard(card.id)}>Edit</button>
