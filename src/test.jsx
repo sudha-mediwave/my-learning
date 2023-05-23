@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Searchicon from './Searchicon';
+import SearchBar from './component/search/SearchBar';
 
 const CardList = () => {
   const [inputValue, setInputValue] = useState('');
   const [cards, setCards] = useState([]);
   const [editingId, setEditingId] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
 
   // useEffect(() => {
   //   const storedCards = localStorage.getItem('cards');
@@ -14,7 +13,9 @@ const CardList = () => {
   //     setCards(JSON.parse(storedCards));
   //   }
   // }, []);
-
+  const handleSearch = (value) => {
+    console.log('Search value:', value);
+  };
   useEffect(() => {
     const storedCards = localStorage.getItem('cards');
     if (storedCards) {
@@ -87,53 +88,27 @@ const CardList = () => {
       return updatedCards;
     });
   };
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchQuery(inputValue);
-  };
-  const filteredCards = searchQuery
-    ? cards.filter((card) =>
-        card.content.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : cards;
+
   return (
     <div className='main_section'>
-      <div className='main_block'>
-        <div className='input_main_block'>
-          <input
-            className='input_section'
-            type='text'
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          {editingId === '' ? (
-            <button className='main_button' onClick={handleAddCard}>
-              Add
-            </button>
-          ) : (
-            <button className='main_button' onClick={handleUpdateCard}>
-              Update
-            </button>
-          )}
-        </div>
-        <div className='search_main_block'>
-          <form onSubmit={handleSearch} className='search_bar'>
-            <input
-              type='text'
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder='Search...'
-              className='input_section'
-            />
-            <button type='submit' className='search_button'>
-              <Searchicon />
-            </button>
-          </form>
-        </div>
-      </div>
+      <input
+        className='input_section'
+        type='text'
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      {editingId === '' ? (
+        <button className='main_button' onClick={handleAddCard}>
+          Add
+        </button>
+      ) : (
+        <button className='main_button' onClick={handleUpdateCard}>
+          Update
+        </button>
+      )}
       {/* <pre>{JSON.stringify(cards, null, 4)}</pre> */}
       <div className='card_main_block'>
-        {filteredCards.map((card) => (
+        {cards.map((card) => (
           <div className='card_design' key={card.id}>
             {card.content}
             <div className='btn_block'>
@@ -142,6 +117,9 @@ const CardList = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <SearchBar placeholder='Search...' onChange={handleSearch} />
       </div>
     </div>
   );
