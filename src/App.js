@@ -40,6 +40,7 @@ const CardList = () => {
       const newCard = {
         id: generateId(),
         content: inputValue,
+        favorite: false,
       };
       setCards((prevCards) => [...prevCards, newCard]);
       setLocalStorage(newCard);
@@ -54,6 +55,20 @@ const CardList = () => {
       setInputValue(cards[index].content);
     }
   };
+  const handleDeleteCard = (id) => {
+    setCards((prevCards) => {
+      const updatedCards = prevCards.filter((card) => card.id !== id);
+      localStorage.setItem('cards', JSON.stringify(updatedCards));
+      return updatedCards;
+    });
+    // const updatedCards = cards.filter((card) => card.id !== id);
+    // setCards(updatedCards);
+    // localStorage.setItem('cards', JSON.stringify(updatedCards));
+    // const values = localStorage.getItem('cards').JSON.parse();
+    // console.log('values', values);
+    // const result = values.filter((item) => item.id === id);
+    // localStorage.removeItem(result.id);
+  };
 
   const handleUpdateCard = () => {
     if (inputValue.trim() !== '') {
@@ -62,6 +77,7 @@ const CardList = () => {
         const index = updatedCards.findIndex((card) => card.id === editingId);
         if (index !== -1) {
           updatedCards[index].content = inputValue;
+          localStorage.setItem('cards', JSON.stringify(updatedCards));
         }
         return updatedCards;
       });
@@ -69,18 +85,47 @@ const CardList = () => {
       setEditingId('');
     }
   };
-
-  const handleDeleteCard = (id) => {
+  const handleToggleFavorite = (id) => {
     setCards((prevCards) => {
-      const updatedCards = [...prevCards];
-      const index = updatedCards.findIndex((card) => card.id === id);
-      if (index !== -1) {
-        updatedCards.splice(index, 1);
-      }
-
+      const updatedCards = prevCards.map((card) => {
+        if (card.id === id) {
+          return {
+            ...card,
+            favorite: !card.favorite, // Toggle the favorite property
+          };
+        }
+        return card;
+      });
+      localStorage.setItem('cards', JSON.stringify(updatedCards));
       return updatedCards;
     });
   };
+  // const handleDeleteCard = (id) => {
+  //   setCards((prevCards) => {
+  //     const updatedCards = [...prevCards];
+  //     const index = updatedCards.findIndex((card) => card.id === id);
+  //     if (index !== -1) {
+  //       updatedCards.splice(index, 1);
+  //       localStorage.setItem('cards', JSON.stringify(updatedCards));
+  //     }
+
+  //     return updatedCards;
+  //   });
+  // };
+  // const handleUpdateCard = () => {
+  //   if (inputValue.trim() !== '') {
+  //     setCards((prevCards) => {
+  //       const updatedCards = [...prevCards];
+  //       const index = updatedCards.findIndex((card) => card.id === editingId);
+  //       if (index !== -1) {
+  //         updatedCards[index].content = inputValue;
+  //       }
+  //       return updatedCards;
+  //     });
+  //     setInputValue('');
+  //     setEditingId('');
+  //   }
+  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -142,6 +187,9 @@ const CardList = () => {
             <div className='btn_block'>
               <button onClick={() => handleEditCard(card.id)}>Edit</button>
               <button onClick={() => handleDeleteCard(card.id)}>Delete</button>
+              <button onClick={() => handleToggleFavorite(card.id)}>
+                {card.favorite ? 'Remove Favorite' : 'Add Favorite'}
+              </button>
             </div>
           </div>
         ))}

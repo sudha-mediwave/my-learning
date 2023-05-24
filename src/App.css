@@ -43,9 +43,9 @@
 .card_design {
   background-color: lightgreen;
   /* margin: 50px auto; */
-  padding: 12px 0;
+  padding: 12px 10px;
   display: block;
-  width: 100%;
+
   border-radius: 10px;
   box-shadow: 3px 6px 5px #545353;
   font-size: 20px;
@@ -90,9 +90,9 @@ input:focus {
 }
 .card_main_block {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
-  width: 70%;
+  width: 90%;
   margin: auto;
 }
 .btn_block {
@@ -109,12 +109,12 @@ input:focus {
 .btn_block button:hover {
   box-shadow: 0px 2px 15px 0px #97b1bf;
 }
-.card_design:hover {
+/* .card_design:hover {
   transform: scale(1.05);
   transition: 0.25s cubic-bezier(0.5, 0, 0.5, 1);
   transition-property: transform;
   background-color: #6aef6a;
-}
+} */
 .search_bar {
   display: flex;
 }
@@ -123,4 +123,12 @@ input:focus {
   margin-left: 10px;
   height: 40px;
   background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+}
+.fav_btn {
+  border-radius: 5px;
+  margin-left: 10px;
+  height: 40px;
+  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+  margin-top: 50px;
+  font-size: 20px;
 }
