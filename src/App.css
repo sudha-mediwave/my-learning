@@ -39,6 +39,10 @@
 .main_block {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+}
+.input_main_block {
+  display: flex;
 }
 .card_design {
   background-color: lightgreen;
@@ -64,14 +68,17 @@
   color: white;
 }
 .input_section {
-  padding: 10px;
-  border-radius: 10px;
-  width: 50%;
-  margin-bottom: 50px;
+  width: 260px;
+  border: 1px solid #555;
+  display: block;
+  padding: 9px 4px 9px 40px;
+  background: #fff;
+
+  border-radius: 15px;
 }
 .main_button {
   padding: 8px 20px;
-  border-radius: 10px;
+  border-radius: 25px;
   margin-left: 10px;
   font-size: 18px;
   font-weight: 600;
@@ -101,7 +108,7 @@ input:focus {
 }
 .btn_block button {
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 25px;
   margin-left: 10px;
   background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
   font-weight: 600;
@@ -121,22 +128,64 @@ input:focus {
   display: flex;
 }
 .search_button {
-  border-radius: 5px;
+  border-radius: 25px;
   margin-left: 10px;
   height: 40px;
   background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
   cursor: pointer;
+  width: 60px;
 }
-.fav_btn {
-  border-radius: 5px;
-  margin-left: 10px;
-  height: 40px;
-  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
-  margin-top: 50px;
-  font-size: 20px;
-  padding: 10px;
-  border: 1px solid #000;
-}
+
 .fav_section {
   margin-top: 50px;
+}
+.favorite_button {
+  border-radius: 25px;
+  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+  cursor: pointer;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  border: 1px solid #000;
+}
+form.nosubmit {
+  border: none;
+  padding: 0;
+}
+
+input.nosubmit {
+  width: 260px;
+  border: 1px solid #555;
+  display: block;
+  padding: 9px 4px 9px 40px;
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat 13px center;
+  border-radius: 15px;
+}
+/* Form Input */
+.form_main_block {
+  padding: 50px;
+}
+.form_section {
+  display: inline-grid;
+}
+.form_section label {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.form_section button {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 15px;
+}
+.user_list {
+  padding: 15px;
+}
+.btn_align button {
+  margin-right: 10px;
+}
+.error {
+  color: red;
 }

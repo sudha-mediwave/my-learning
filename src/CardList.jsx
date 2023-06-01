@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import Searchicon from './Searchicon';
+// import Searchicon from './Searchicon';
 
 const CardList = () => {
   const [inputValue, setInputValue] = useState('');
@@ -62,13 +62,6 @@ const CardList = () => {
       localStorage.setItem('cards', JSON.stringify(updatedCards));
       return updatedCards;
     });
-    // const updatedCards = cards.filter((card) => card.id !== id);
-    // setCards(updatedCards);
-    // localStorage.setItem('cards', JSON.stringify(updatedCards));
-    // const values = localStorage.getItem('cards').JSON.parse();
-    // console.log('values', values);
-    // const result = values.filter((item) => item.id === id);
-    // localStorage.removeItem(result.id);
   };
 
   const handleUpdateCard = () => {
@@ -102,33 +95,6 @@ const CardList = () => {
     });
   };
 
-  // const handleDeleteCard = (id) => {
-  //   setCards((prevCards) => {
-  //     const updatedCards = [...prevCards];
-  //     const index = updatedCards.findIndex((card) => card.id === id);
-  //     if (index !== -1) {
-  //       updatedCards.splice(index, 1);
-  //       localStorage.setItem('cards', JSON.stringify(updatedCards));
-  //     }
-
-  //     return updatedCards;
-  //   });
-  // };
-  // const handleUpdateCard = () => {
-  //   if (inputValue.trim() !== '') {
-  //     setCards((prevCards) => {
-  //       const updatedCards = [...prevCards];
-  //       const index = updatedCards.findIndex((card) => card.id === editingId);
-  //       if (index !== -1) {
-  //         updatedCards[index].content = inputValue;
-  //       }
-  //       return updatedCards;
-  //     });
-  //     setInputValue('');
-  //     setEditingId('');
-  //   }
-  // };
-
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(inputValue);
@@ -161,17 +127,26 @@ const CardList = () => {
           )}
         </div>
         <div className='search_main_block'>
-          <form onSubmit={handleSearch} className='search_bar'>
+          {/* <form onSubmit={handleSearch} className='search_bar'>
             <input
               type='text'
               value={inputValue}
               onChange={handleInputChange}
               placeholder='Search...'
-              className='input_section'
+              className='input_section1'
             />
             <button type='submit' className='search_button'>
               <Searchicon />
             </button>
+          </form> */}
+          <form onSubmit={handleSearch} class='nosubmit'>
+            <input
+              class='nosubmit'
+              value={inputValue}
+              onChange={handleInputChange}
+              type='search'
+              placeholder='Search...'
+            />
           </form>
         </div>
       </div>
@@ -195,6 +170,8 @@ const CardList = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className='fav_section'>
         <Link to='/favorites' className='favorite_button'>
           View Favorites
         </Link>

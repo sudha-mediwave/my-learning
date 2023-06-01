@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CardList from './CardList';
 import FavoriteList from './FavoriteList';
+import FormInput from './FormInput';
 
 const App = () => {
   const [cards, setCards] = useState([]);
@@ -55,6 +56,7 @@ const App = () => {
               path='/favorites'
               element={<FavoriteList favoriteCards={favoriteCards} />}
             />
+            <Route path='/inputform' element={<FormInput />} />
           </Routes>
         </main>
       </BrowserRouter>
