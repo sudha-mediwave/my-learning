@@ -85,7 +85,7 @@ const CardList = () => {
         if (card.id === id) {
           return {
             ...card,
-            favorite: !card.favorite, // Toggle the favorite property
+            favorite: !card.favorite, 
           };
         }
         return card;

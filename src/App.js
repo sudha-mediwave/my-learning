@@ -56,7 +56,7 @@ const App = () => {
               path='/favorites'
               element={<FavoriteList favoriteCards={favoriteCards} />}
             />
-            <Route path='/inputform' element={<FormInput />} />
+            <Route path='/addlist' element={<FormInput />} />
           </Routes>
         </main>
       </BrowserRouter>
